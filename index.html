@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,12 +41,13 @@
                         {{ 8+period | pad 2 }}:10~{{ 8+period+1 | pad 2 }}:00
                     </td>
                     <template v-for="(index,weekday) in weekdays">
-                        <td class="table-info" v-if="course[index][period+1]">
+                        <td class="table-{{ course[index][period+1].type }}" v-if="course[index][period+1]">
+                            <template v-if="course[index][period+1].code">({{ course[index][period+1].code }})</template>
                             {{ course[index][period+1].course }}<br/>
                             {{ course[index][period+1].classroom }}<br/>
                             {{ course[index][period+1].teacher }}
                         </td>
-                        <td v-else="course[index][period+1]"></td>
+                        <td v-else="course[index][period+1]" v-bind:class="{'table-active':period+1==5||period+1==10}"></td>
                     </template>
                 </tr>
                 </tbody>
@@ -91,11 +92,19 @@
                 this.$http.get('./data.json').then(function (response) {
                     var json = response.data;
                     var course = {};
+                    //一般課程
                     $.each(json.course, function (key, value) {
                         $.each(value["time"], function (sKey, sValue) {
-                            if (course[sValue.weekday] === undefined) {
-                                course[sValue.weekday] = {};
-                            }
+                            course[sValue.weekday] = course[sValue.weekday] !== undefined ? course[sValue.weekday] : {};
+                            value.type = 'info';
+                            course[sValue.weekday][sValue.period] = value;
+                        });
+                    });
+                    //會議
+                    $.each(json.meeting, function (key, value) {
+                        $.each(value["time"], function (sKey, sValue) {
+                            course[sValue.weekday] = course[sValue.weekday] !== undefined ? course[sValue.weekday] : {};
+                            value.type = 'warning';
                             course[sValue.weekday][sValue.period] = value;
                         });
                     });

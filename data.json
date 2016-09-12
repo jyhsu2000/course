@@ -1,6 +1,7 @@
 {
     "course": [
         {
+            "code": 1688,
             "course": "高等密碼學",
             "classroom": "資電311",
             "teacher": "李榮三",
@@ -20,6 +21,7 @@
             ]
         },
         {
+            "code": 1689,
             "course": "軟體元件設計",
             "classroom": "資電311",
             "teacher": "薛念林",
@@ -39,6 +41,7 @@
             ]
         },
         {
+            "code": 1699,
             "course": "資訊專題研討(三)",
             "classroom": "資電222(第三國會廳)",
             "teacher": "林志敏",
@@ -50,6 +53,7 @@
             ]
         },
         {
+            "code": 2612,
             "course": "高等軟體工程",
             "classroom": "資電311",
             "teacher": "陳錫民",
@@ -69,6 +73,7 @@
             ]
         },
         {
+            "code": 1703,
             "course": "文獻研討(七)",
             "classroom": "資電205",
             "teacher": "李維斌",
@@ -76,6 +81,40 @@
                 {
                     "weekday": 6,
                     "period": 14
+                }
+            ]
+        }
+    ],
+    "meeting": [
+        {
+            "course": "大學部專題會議",
+            "classroom": "",
+            "time": [
+                {
+                    "weekday": 1,
+                    "period": 9
+                },
+                {
+                    "weekday": 1,
+                    "period": 10
+                }
+            ]
+        },
+        {
+            "course": "例行Meeting",
+            "classroom": "資電247",
+            "time": [
+                {
+                    "weekday": 6,
+                    "period": 2
+                },
+                {
+                    "weekday": 6,
+                    "period": 3
+                },
+                {
+                    "weekday": 6,
+                    "period": 4
                 }
             ]
         }

@@ -44,7 +44,7 @@
                         <td class="table-info" v-if="course[index][period+1]">
                             {{ course[index][period+1].course }}<br/>
                             {{ course[index][period+1].classroom }}<br/>
-                            {{ course[index][period+1].tname }}
+                            {{ course[index][period+1].teacher }}
                         </td>
                         <td v-else="course[index][period+1]"></td>
                     </template>
@@ -88,17 +88,19 @@
         },
         methods: {
             fetchCourse: function () {
-                this.$http.get('./course.json').then(function (response) {
+                this.$http.get('./data.json').then(function (response) {
                     var json = response.data;
                     var course = {};
-                    $.each(json, function (key, value) {
-                        if (course[value.weekday] === undefined) {
-                            course[value.weekday] = {};
-                        }
-                        course[value.weekday][value.period] = value;
+                    $.each(json.course, function (key, value) {
+                        $.each(value["time"], function (sKey, sValue) {
+                            if (course[sValue.weekday] === undefined) {
+                                course[sValue.weekday] = {};
+                            }
+                            course[sValue.weekday][sValue.period] = value;
+                        });
                     });
                     this.$set('course', course);
-                })
+                });
             }
         }
     });

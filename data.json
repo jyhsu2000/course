@@ -1,0 +1,83 @@
+{
+    "course": [
+        {
+            "course": "高等密碼學",
+            "classroom": "資電311",
+            "teacher": "李榮三",
+            "time": [
+                {
+                    "weekday": 1,
+                    "period": 2
+                },
+                {
+                    "weekday": 1,
+                    "period": 3
+                },
+                {
+                    "weekday": 1,
+                    "period": 4
+                }
+            ]
+        },
+        {
+            "course": "軟體元件設計",
+            "classroom": "資電311",
+            "teacher": "薛念林",
+            "time": [
+                {
+                    "weekday": 4,
+                    "period": 6
+                },
+                {
+                    "weekday": 4,
+                    "period": 7
+                },
+                {
+                    "weekday": 4,
+                    "period": 8
+                }
+            ]
+        },
+        {
+            "course": "資訊專題研討(三)",
+            "classroom": "資電222(第三國會廳)",
+            "teacher": "林志敏",
+            "time": [
+                {
+                    "weekday": 2,
+                    "period": 9
+                }
+            ]
+        },
+        {
+            "course": "高等軟體工程",
+            "classroom": "資電311",
+            "teacher": "陳錫民",
+            "time": [
+                {
+                    "weekday": 4,
+                    "period": 11
+                },
+                {
+                    "weekday": 4,
+                    "period": 12
+                },
+                {
+                    "weekday": 4,
+                    "period": 13
+                }
+            ]
+        },
+        {
+            "course": "文獻研討(七)",
+            "classroom": "資電205",
+            "teacher": "李維斌",
+            "time": [
+                {
+                    "weekday": 6,
+                    "period": 14
+                }
+            ]
+        }
+    ]
+}

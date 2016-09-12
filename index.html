@@ -35,11 +35,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="n in 14">
+                <tr v-for="period in 14">
                     <td scope="row">
-                        {{ n+1 }}<br/>
-                        {{ 8+n | pad 2 }}:10~{{ 8+n+1 | pad 2 }}:00
+                        {{ period+1 }}<br/>
+                        {{ 8+period | pad 2 }}:10~{{ 8+period+1 | pad 2 }}:00
                     </td>
+                    <template v-for="(index,weekday) in weekdays">
+                        <td class="table-info" v-if="course[index][period+1]">
+                            {{ course[index][period+1].course }}<br/>
+                            {{ course[index][period+1].classroom }}<br/>
+                            {{ course[index][period+1].tname }}
+                        </td>
+                        <td v-else="course[index][period+1]"></td>
+                    </template>
                 </tr>
                 </tbody>
             </table>
@@ -73,6 +81,24 @@
                 4: '星期四',
                 5: '星期五',
                 6: '星期六'
+            }
+        },
+        ready: function () {
+            this.fetchCourse();
+        },
+        methods: {
+            fetchCourse: function () {
+                this.$http.get('./course.json').then(function (response) {
+                    var json = response.data;
+                    var course = {};
+                    $.each(json, function (key, value) {
+                        if (course[value.weekday] === undefined) {
+                            course[value.weekday] = {};
+                        }
+                        course[value.weekday][value.period] = value;
+                    });
+                    this.$set('course', course);
+                })
             }
         }
     });

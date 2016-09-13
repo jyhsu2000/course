@@ -26,8 +26,8 @@
 <div class="container text-md-center">
     <h1>Course</h1>
     <div class="table-responsive">
-        <div id="courseTable">
-            <table class="table table-bordered">
+        <div id="courseDiv">
+            <table class="table table-bordered" id="courseTable">
                 <thead class="thead-inverse">
                 <tr>
                     <th></th>
@@ -90,7 +90,7 @@
     });
 
     var vue = new Vue({
-        el: '#courseTable',
+        el: '#courseDiv',
         data: {
             weekdays: {
                 0: '星期日',

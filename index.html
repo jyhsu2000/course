@@ -40,7 +40,7 @@
                 <tr v-for="period in 14">
                     <td scope="row">
                         {{ period+1 }}<br/>
-                        {{ 8+period | pad 2 }}:10~{{ 8+period+1 | pad 2 }}:00
+                        {{ period+1 | toTimeSpan}}
                     </td>
                     <template v-for="(index,weekday) in weekdays">
                         <td class="table-{{ course[index][period+1].type }}" v-if="course[index][period+1]">
@@ -77,12 +77,16 @@
         "course": "info",
         "meeting": "warning"
     };
-    Vue.filter('pad', function (str, size) {
+    var pad = function (str, size) {
         var s = String(str);
         while (s.length < (size || 2)) {
             s = "0" + s;
         }
         return s;
+    };
+    Vue.filter('toTimeSpan', function (period) {
+        var hour = period - 1 + 8;
+        return pad(hour, 2) + ':10~' + pad(hour + 1, 2) + ':00';
     });
 
     var vue = new Vue({

@@ -115,15 +115,21 @@
                         //單一類型課程清單
                         $.each(courseList, function (key, value) {
                             //單一課程
-                            $.each(value["time"], function (sKey, sValue) {
+                            $.each(value["time"], function (timeKey, timeValue) {
                                 //上課時間
-                                course[sValue.weekday] = course[sValue.weekday] !== undefined ? course[sValue.weekday] : {};
-                                //類型
-                                value.type = type[courseType];
+                                course[timeValue.weekday] = course[timeValue.weekday] !== undefined ? course[timeValue.weekday] : {};
+                                //課程資料
+                                var courseData = {
+                                    code: value.code,
+                                    course: value.course,
+                                    teacher: value.teacher,
+                                    classroom: timeValue.classroom,
+                                    type: type[courseType]
+                                };
                                 //持續節數
-                                var length = sValue.length || 1;
+                                var length = timeValue.length || 1;
                                 for (var i = 0; i < length; i++) {
-                                    course[sValue.weekday][sValue.period + i] = value;
+                                    course[timeValue.weekday][timeValue.period + i] = courseData;
                                 }
                             });
                         });

@@ -8,15 +8,8 @@
             "time": [
                 {
                     "weekday": 1,
-                    "period": 2
-                },
-                {
-                    "weekday": 1,
-                    "period": 3
-                },
-                {
-                    "weekday": 1,
-                    "period": 4
+                    "period": 2,
+                    "length": 3
                 }
             ]
         },
@@ -28,15 +21,8 @@
             "time": [
                 {
                     "weekday": 4,
-                    "period": 6
-                },
-                {
-                    "weekday": 4,
-                    "period": 7
-                },
-                {
-                    "weekday": 4,
-                    "period": 8
+                    "period": 6,
+                    "length": 3
                 }
             ]
         },
@@ -60,15 +46,8 @@
             "time": [
                 {
                     "weekday": 4,
-                    "period": 11
-                },
-                {
-                    "weekday": 4,
-                    "period": 12
-                },
-                {
-                    "weekday": 4,
-                    "period": 13
+                    "period": 11,
+                    "length": 3
                 }
             ]
         },
@@ -92,11 +71,8 @@
             "time": [
                 {
                     "weekday": 1,
-                    "period": 9
-                },
-                {
-                    "weekday": 1,
-                    "period": 10
+                    "period": 9,
+                    "length": 2
                 }
             ]
         },
@@ -106,15 +82,8 @@
             "time": [
                 {
                     "weekday": 6,
-                    "period": 2
-                },
-                {
-                    "weekday": 6,
-                    "period": 3
-                },
-                {
-                    "weekday": 6,
-                    "period": 4
+                    "period": 2,
+                    "length": 3
                 }
             ]
         }

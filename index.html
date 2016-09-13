@@ -13,7 +13,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css"
+          integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
     <style>
         th, td {
             text-align: center;
@@ -43,12 +44,14 @@
                     </td>
                     <template v-for="(index,weekday) in weekdays">
                         <td class="table-{{ course[index][period+1].type }}" v-if="course[index][period+1]">
-                            <template v-if="course[index][period+1].code">({{ course[index][period+1].code }})</template>
+                            <template v-if="course[index][period+1].code">({{ course[index][period+1].code }})
+                            </template>
                             {{ course[index][period+1].course }}<br/>
                             {{ course[index][period+1].classroom }}<br/>
                             {{ course[index][period+1].teacher }}
                         </td>
-                        <td v-else="course[index][period+1]" v-bind:class="{'table-active':period+1==5||period+1==10}"></td>
+                        <td v-else="course[index][period+1]"
+                            v-bind:class="{'table-active':period+1==5||period+1==10}"></td>
                     </template>
                 </tr>
                 </tbody>
@@ -57,13 +60,23 @@
     </div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"
+        integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"
+        integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js"
+        integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU"
+        crossorigin="anonymous"></script>
 
 <script src="https://cdn.jsdelivr.net/vue/1.0.26/vue.min.js"></script>
 <script src="https://cdn.jsdelivr.net/vue.resource/1.0.1/vue-resource.min.js"></script>
 <script>
+    var type = {
+        "course": "info",
+        "meeting": "warning"
+    };
     Vue.filter('pad', function (str, size) {
         var s = String(str);
         while (s.length < (size || 2)) {
@@ -93,20 +106,22 @@
                 this.$http.get('./data.json').then(function (response) {
                     var json = response.data;
                     var course = {};
-                    //一般課程
-                    $.each(json.course, function (key, value) {
-                        $.each(value["time"], function (sKey, sValue) {
-                            course[sValue.weekday] = course[sValue.weekday] !== undefined ? course[sValue.weekday] : {};
-                            value.type = 'info';
-                            course[sValue.weekday][sValue.period] = value;
-                        });
-                    });
-                    //會議
-                    $.each(json.meeting, function (key, value) {
-                        $.each(value["time"], function (sKey, sValue) {
-                            course[sValue.weekday] = course[sValue.weekday] !== undefined ? course[sValue.weekday] : {};
-                            value.type = 'warning';
-                            course[sValue.weekday][sValue.period] = value;
+                    //課程類型
+                    $.each(json, function (courseType, courseList) {
+                        //單一類型課程清單
+                        $.each(courseList, function (key, value) {
+                            //單一課程
+                            $.each(value["time"], function (sKey, sValue) {
+                                //上課時間
+                                course[sValue.weekday] = course[sValue.weekday] !== undefined ? course[sValue.weekday] : {};
+                                //類型
+                                value.type = type[courseType];
+                                //持續節數
+                                var length = sValue.length || 1;
+                                for (var i = 0; i < length; i++) {
+                                    course[sValue.weekday][sValue.period + i] = value;
+                                }
+                            });
                         });
                     });
                     this.$set('course', course);

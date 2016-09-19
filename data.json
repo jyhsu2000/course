@@ -1,19 +1,6 @@
 {
     "course": [
         {
-            "code": 1688,
-            "course": "高等密碼學",
-            "teacher": "李榮三",
-            "time": [
-                {
-                    "classroom": "資電311",
-                    "weekday": 1,
-                    "period": 2,
-                    "length": 3
-                }
-            ]
-        },
-        {
             "code": 1689,
             "course": "軟體元件設計",
             "teacher": "薛念林",

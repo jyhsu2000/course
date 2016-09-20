@@ -47,15 +47,7 @@
                         {{ periodTime(period+1)}}
                     </td>
                     <template v-for="(index,weekday) in weekdays">
-                        <td class="table-{{ course[index][period+1].type }}" v-if="course[index][period+1]">
-                            <template v-if="course[index][period+1].code">({{ course[index][period+1].code }})
-                            </template>
-                            {{ course[index][period+1].course }}<br/>
-                            {{ course[index][period+1].classroom }}<br/>
-                            {{ course[index][period+1].teacher }}
-                        </td>
-                        <td v-else="course[index][period+1]"
-                            v-bind:class="{'breakTime':isBreakTime(period+1)}"></td>
+                        <td-course :period="period" :course="course[index][period+1]"></td-course>
                     </template>
                 </tr>
                 </tbody>
@@ -63,6 +55,16 @@
         </div>
     </div>
 </div>
+
+<template id="td-course">
+    <td class="table-{{ course.type }}" v-if="course">
+        <template v-if="course.code">({{ course.code }})</template>
+        {{ course.course }}<br/>
+        {{ course.classroom }}<br/>
+        {{ course.teacher }}
+    </td>
+    <td v-else v-bind:class="{'breakTime':isBreakTime(period)}"></td>
+</template>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"
         integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY"
@@ -89,6 +91,16 @@
         }
         return s;
     };
+
+    Vue.component('td-course', {
+        props: ['period', 'course'],
+        template: '#td-course',
+        methods: {
+            isBreakTime: function (period) {
+                return period + 1 == 5 || period + 1 == 10
+            }
+        }
+    });
 
     var vue = new Vue({
         el: '#courseDiv',
@@ -141,9 +153,6 @@
             periodTime: function (period) {
                 var hour = period - 1 + 8;
                 return pad(hour, 2) + ':10~' + pad(hour + 1, 2) + ':00';
-            },
-            isBreakTime: function (period) {
-                return period + 1 == 5 || period + 1 == 10
             }
         }
     });

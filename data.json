@@ -74,5 +74,43 @@
                 }
             ]
         }
+    ],
+    "club": [
+        {
+            "course": "黑客社（Arduino）",
+            "teacher": "荊輔翔、黃仁又",
+            "time": [
+                {
+                    "classroom": "資電234",
+                    "weekday": 2,
+                    "period": 11,
+                    "length": 3
+                }
+            ]
+        },
+        {
+            "course": "黑客社（Python）",
+            "teacher": "陳靖德、楊易哲、陳昱亨",
+            "time": [
+                {
+                    "classroom": "資電234",
+                    "weekday": 3,
+                    "period": 11,
+                    "length": 3
+                }
+            ]
+        },
+        {
+            "course": "黑客社（資訊安全）",
+            "teacher": "黃泰銘、張佑維",
+            "time": [
+                {
+                    "classroom": "資電234",
+                    "weekday": 5,
+                    "period": 8,
+                    "length": 3
+                }
+            ]
+        }
     ]
 }

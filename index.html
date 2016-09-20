@@ -20,14 +20,18 @@
             text-align: center;
             white-space: nowrap;
         }
+
+        td.breakTime {
+            background: #f0f0f0;
+        }
     </style>
 </head>
 <body>
-<div class="container text-md-center">
+<div class="container-fluid text-md-center">
     <h1>Course</h1>
     <div class="table-responsive">
         <div id="courseDiv">
-            <table class="table table-bordered" id="courseTable">
+            <table class="table table-bordered table-hover" id="courseTable">
                 <thead class="thead-inverse">
                 <tr>
                     <th></th>
@@ -51,7 +55,7 @@
                             {{ course[index][period+1].teacher }}
                         </td>
                         <td v-else="course[index][period+1]"
-                            v-bind:class="{'table-active':period+1==5||period+1==10}"></td>
+                            v-bind:class="{'breakTime':period+1==5||period+1==10}"></td>
                     </template>
                 </tr>
                 </tbody>
@@ -75,7 +79,8 @@
 <script>
     var type = {
         "course": "info",
-        "meeting": "warning"
+        "meeting": "warning",
+        "club": "success"
     };
     var pad = function (str, size) {
         var s = String(str);

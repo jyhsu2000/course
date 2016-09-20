@@ -44,7 +44,7 @@
                 <tr v-for="period in 14">
                     <td scope="row">
                         {{ period+1 }}<br/>
-                        {{ period+1 | toTimeSpan}}
+                        {{ periodTime(period+1)}}
                     </td>
                     <template v-for="(index,weekday) in weekdays">
                         <td class="table-{{ course[index][period+1].type }}" v-if="course[index][period+1]">
@@ -55,7 +55,7 @@
                             {{ course[index][period+1].teacher }}
                         </td>
                         <td v-else="course[index][period+1]"
-                            v-bind:class="{'breakTime':period+1==5||period+1==10}"></td>
+                            v-bind:class="{'breakTime':isBreakTime(period+1)}"></td>
                     </template>
                 </tr>
                 </tbody>
@@ -89,10 +89,6 @@
         }
         return s;
     };
-    Vue.filter('toTimeSpan', function (period) {
-        var hour = period - 1 + 8;
-        return pad(hour, 2) + ':10~' + pad(hour + 1, 2) + ':00';
-    });
 
     var vue = new Vue({
         el: '#courseDiv',
@@ -141,6 +137,13 @@
                     });
                     this.$set('course', course);
                 });
+            },
+            periodTime: function (period) {
+                var hour = period - 1 + 8;
+                return pad(hour, 2) + ':10~' + pad(hour + 1, 2) + ':00';
+            },
+            isBreakTime: function (period) {
+                return period + 1 == 5 || period + 1 == 10
             }
         }
     });

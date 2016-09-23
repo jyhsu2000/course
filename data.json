@@ -67,6 +67,17 @@
             "course": "例行Meeting",
             "time": [
                 {
+                    "classroom": "資電224",
+                    "weekday": 5,
+                    "period": 2,
+                    "length": 3
+                }
+            ]
+        },
+        {
+            "course": "例行Meeting",
+            "time": [
+                {
                     "classroom": "資電247",
                     "weekday": 6,
                     "period": 2,
